@@ -1,0 +1,9 @@
+{
+  "graphs": {
+    "atlas_v2": "./atlas_v2/graph.py:graph"
+  },
+  "env": ".env",
+  "dependencies": [
+    "."
+  ]
+}
