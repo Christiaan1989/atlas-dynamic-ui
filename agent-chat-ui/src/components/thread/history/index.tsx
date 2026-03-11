@@ -25,7 +25,7 @@ function ThreadList({
   const [threadId, setThreadId] = useQueryState("threadId");
 
   return (
-    <div className="flex h-full w-full flex-col items-start justify-start gap-2 overflow-y-scroll [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-gray-300 [&::-webkit-scrollbar-track]:bg-transparent">
+    <div className="flex h-full w-full flex-col items-start justify-start gap-1 overflow-y-scroll px-2 [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-white/10 [&::-webkit-scrollbar-track]:bg-transparent">
       {threads.map((t) => {
         let itemText = t.thread_id;
         if (
@@ -96,21 +96,21 @@ export default function ThreadHistory() {
 
   return (
     <>
-      <div className="shadow-inner-right hidden h-screen w-[300px] shrink-0 flex-col items-start justify-start gap-6 border-r-[1px] border-[#0F2B46]/10 bg-[#fafbfc] lg:flex">
-        <div className="flex w-full items-center justify-between border-b border-[#0F2B46]/10 px-4 py-2.5">
+      <div className="hidden h-screen w-[280px] shrink-0 flex-col items-start justify-start gap-4 bg-[#080808] lg:flex">
+        <div className="flex w-full items-center justify-between border-b border-white/[0.06] px-4 py-2.5">
           <Button
-            className="hover:bg-[#0F2B46]/5"
+            className="hover:bg-white/5 text-white/30"
             variant="ghost"
             onClick={() => setChatHistoryOpen((p) => !p)}
           >
             {chatHistoryOpen ? (
-              <PanelRightOpen className="size-5 text-[#0F2B46]" />
+              <PanelRightOpen className="size-5" />
             ) : (
-              <PanelRightClose className="size-5 text-[#0F2B46]" />
+              <PanelRightClose className="size-5" />
             )}
           </Button>
-          <h1 className="text-sm font-semibold tracking-tight text-[#0F2B46]">
-            Claims History
+          <h1 className="text-xs font-semibold tracking-wider uppercase text-white/30">
+            History
           </h1>
         </div>
         {threadsLoading ? (

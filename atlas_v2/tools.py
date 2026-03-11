@@ -52,6 +52,33 @@ def _error(resp: httpx.Response) -> str:
 
 
 # ---------------------------------------------------------------------------
+# UI view management (frontend-facing, no HTTP call)
+# ---------------------------------------------------------------------------
+@tool
+def set_active_view(view: str) -> str:
+    """Switch the customer portal UI to a specific full-screen view.
+
+    Call this to change what the customer sees on screen. The view transition
+    is animated and immediate.
+
+    IMPORTANT: Only call this when the context clearly warrants a view change.
+    Do NOT call this on every message.
+
+    Args:
+        view: The view to switch to. Must be one of:
+              - "home" — the landing/welcome screen
+              - "policy_qa" — the policy questions & answers view
+              - "claims" — the guided claims filing experience
+              - "coverage_upgrade" — the coverage upgrade options view
+              - "damage_assessment" — the standalone damage assessment scanner
+    """
+    valid_views = {"home", "policy_qa", "claims", "coverage_upgrade", "damage_assessment"}
+    if view not in valid_views:
+        return json.dumps({"error": f"Invalid view '{view}'. Must be one of: {', '.join(sorted(valid_views))}"})
+    return json.dumps({"active_view": view, "status": "ok"})
+
+
+# ---------------------------------------------------------------------------
 # Policy document retrieval (RAG)
 # ---------------------------------------------------------------------------
 @tool

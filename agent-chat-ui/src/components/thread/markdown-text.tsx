@@ -64,7 +64,7 @@ const defaultComponents: any = {
   h1: ({ className, ...props }: { className?: string }) => (
     <h1
       className={cn(
-        "mt-5 mb-2 text-[26px] font-semibold tracking-tight text-[#0F2B46] first:mt-0 last:mb-0",
+        "mt-5 mb-2 text-[26px] font-semibold tracking-tight text-foreground first:mt-0 last:mb-0",
         className,
       )}
       {...props}
@@ -73,7 +73,7 @@ const defaultComponents: any = {
   h2: ({ className, ...props }: { className?: string }) => (
     <h2
       className={cn(
-        "mt-4 mb-2 text-[22px] font-semibold tracking-tight text-[#0F2B46] first:mt-0 last:mb-0",
+        "mt-4 mb-2 text-[22px] font-semibold tracking-tight text-foreground first:mt-0 last:mb-0",
         className,
       )}
       {...props}
@@ -82,7 +82,7 @@ const defaultComponents: any = {
   h3: ({ className, ...props }: { className?: string }) => (
     <h3
       className={cn(
-        "mt-3.5 mb-1.5 text-[18px] font-semibold tracking-tight text-[#0F2B46] first:mt-0 last:mb-0",
+        "mt-3.5 mb-1.5 text-[18px] font-semibold tracking-tight text-foreground first:mt-0 last:mb-0",
         className,
       )}
       {...props}
@@ -91,7 +91,7 @@ const defaultComponents: any = {
   h4: ({ className, ...props }: { className?: string }) => (
     <h4
       className={cn(
-        "mt-3 mb-1.5 text-[16px] font-medium text-[#0F2B46] first:mt-0 last:mb-0",
+        "mt-3 mb-1.5 text-[16px] font-medium text-foreground first:mt-0 last:mb-0",
         className,
       )}
       {...props}
@@ -100,7 +100,7 @@ const defaultComponents: any = {
   h5: ({ className, ...props }: { className?: string }) => (
     <h5
       className={cn(
-        "mt-2.5 mb-1 text-[15px] font-medium text-[#0F2B46]/80 first:mt-0 last:mb-0",
+        "mt-2.5 mb-1 text-[15px] font-medium text-foreground/80 first:mt-0 last:mb-0",
         className,
       )}
       {...props}
@@ -108,20 +108,20 @@ const defaultComponents: any = {
   ),
   h6: ({ className, ...props }: { className?: string }) => (
     <h6
-      className={cn("mt-2 mb-1 text-sm font-medium text-[#0F2B46]/70 first:mt-0 last:mb-0", className)}
+      className={cn("mt-2 mb-1 text-sm font-medium text-foreground/70 first:mt-0 last:mb-0", className)}
       {...props}
     />
   ),
   p: ({ className, ...props }: { className?: string }) => (
     <p
-      className={cn("mt-2 mb-2 text-[15px] leading-relaxed text-[#0F2B46]/85 first:mt-0 last:mb-0", className)}
+      className={cn("mt-2 mb-2 text-[15px] leading-relaxed text-foreground/85 first:mt-0 last:mb-0", className)}
       {...props}
     />
   ),
   a: ({ className, ...props }: { className?: string }) => (
     <a
       className={cn(
-        "font-medium text-[#1a5276] underline underline-offset-2 decoration-[#1a5276]/30 hover:decoration-[#1a5276]",
+        "font-medium text-[#C5961A] underline underline-offset-2 decoration-[#C5961A]/30 hover:decoration-[#C5961A]",
         className,
       )}
       {...props}
@@ -129,19 +129,19 @@ const defaultComponents: any = {
   ),
   blockquote: ({ className, ...props }: { className?: string }) => (
     <blockquote
-      className={cn("border-l-2 border-[#C5961A]/30 pl-3 text-[15px] italic text-[#0F2B46]/70", className)}
+      className={cn("border-l-2 border-[#C5961A]/30 pl-3 text-[15px] italic text-foreground/70", className)}
       {...props}
     />
   ),
   ul: ({ className, ...props }: { className?: string }) => (
     <ul
-      className={cn("my-2 ml-5 list-disc text-[15px] text-[#0F2B46]/85 [&>li]:mt-1", className)}
+      className={cn("my-2 ml-5 list-disc text-[15px] text-foreground/85 [&>li]:mt-1", className)}
       {...props}
     />
   ),
   ol: ({ className, ...props }: { className?: string }) => (
     <ol
-      className={cn("my-2 ml-5 list-decimal text-[15px] text-[#0F2B46]/85 [&>li]:mt-1", className)}
+      className={cn("my-2 ml-5 list-decimal text-[15px] text-foreground/85 [&>li]:mt-1", className)}
       {...props}
     />
   ),
@@ -163,7 +163,7 @@ const defaultComponents: any = {
   th: ({ className, ...props }: { className?: string }) => (
     <th
       className={cn(
-        "bg-[#0F2B46]/[0.04] px-3 py-1.5 text-left text-xs font-semibold text-[#0F2B46]/70 first:rounded-tl-lg last:rounded-tr-lg [&[align=center]]:text-center [&[align=right]]:text-right",
+        "bg-white/[0.04] px-3 py-1.5 text-left text-xs font-semibold text-white/60 first:rounded-tl-lg last:rounded-tr-lg [&[align=center]]:text-center [&[align=right]]:text-right",
         className,
       )}
       {...props}
@@ -234,7 +234,7 @@ const defaultComponents: any = {
 
     return (
       <code
-        className={cn("rounded bg-[#0F2B46]/[0.05] px-1 py-0.5 text-[12px] font-medium text-[#0F2B46]", className)}
+        className={cn("rounded bg-white/[0.08] px-1 py-0.5 text-[12px] font-medium text-[#C5961A]", className)}
         {...props}
       >
         {children}
