@@ -32,7 +32,6 @@ function isVoiceNavMessage(message: { type: string; content: unknown }): boolean
 
 function StickyToBottomContent(props: {
   content: ReactNode;
-  footer?: ReactNode;
   className?: string;
   contentClassName?: string;
 }) {
@@ -46,7 +45,6 @@ function StickyToBottomContent(props: {
       <div ref={context.contentRef} className={props.contentClassName}>
         {props.content}
       </div>
-      {props.footer}
     </div>
   );
 }
@@ -114,56 +112,65 @@ export function ChatPanel({ footer, className, contentClassName }: ChatPanelProp
   };
 
   return (
-    <StickToBottom className={cn("relative flex-1 overflow-hidden", className)}>
-      <StickyToBottomContent
-        className="absolute inset-0 overflow-y-scroll px-4 [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-white/10 [&::-webkit-scrollbar-track]:bg-transparent"
-        contentClassName={cn(
-          "pt-8 pb-16 max-w-3xl mx-auto flex flex-col gap-4 w-full",
-          contentClassName,
-        )}
-        content={
-          <>
-            {messages
-              .filter(
-                (m) =>
-                  !m.id?.startsWith(DO_NOT_RENDER_ID_PREFIX) &&
-                  !isVoiceNavMessage(m),
-              )
-              .map((message, index) =>
-                message.type === "human" ? (
-                  <HumanMessage
-                    key={message.id || `${message.type}-${index}`}
-                    message={message}
-                    isLoading={isLoading}
-                  />
-                ) : (
-                  <AssistantMessage
-                    key={message.id || `${message.type}-${index}`}
-                    message={message}
-                    isLoading={isLoading}
-                    handleRegenerate={handleRegenerate}
-                  />
-                ),
+    <div className={cn("relative flex flex-1 flex-col overflow-hidden", className)}>
+      {/* Scrollable messages area */}
+      <StickToBottom className="relative flex-1 overflow-hidden">
+        <StickyToBottomContent
+          className="absolute inset-0 overflow-y-scroll px-4 [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-white/10 [&::-webkit-scrollbar-track]:bg-transparent"
+          contentClassName={cn(
+            "pt-8 pb-4 max-w-3xl mx-auto flex flex-col gap-4 w-full",
+            contentClassName,
+          )}
+          content={
+            <>
+              {messages
+                .filter(
+                  (m) =>
+                    !m.id?.startsWith(DO_NOT_RENDER_ID_PREFIX) &&
+                    !isVoiceNavMessage(m),
+                )
+                .map((message, index) =>
+                  message.type === "human" ? (
+                    <HumanMessage
+                      key={message.id || `${message.type}-${index}`}
+                      message={message}
+                      isLoading={isLoading}
+                    />
+                  ) : (
+                    <AssistantMessage
+                      key={message.id || `${message.type}-${index}`}
+                      message={message}
+                      isLoading={isLoading}
+                      handleRegenerate={handleRegenerate}
+                    />
+                  ),
+                )}
+              {hasNoAIOrToolMessages && !!stream.interrupt && (
+                <AssistantMessage
+                  key="interrupt-msg"
+                  message={undefined}
+                  isLoading={isLoading}
+                  handleRegenerate={handleRegenerate}
+                />
               )}
-            {hasNoAIOrToolMessages && !!stream.interrupt && (
-              <AssistantMessage
-                key="interrupt-msg"
-                message={undefined}
-                isLoading={isLoading}
-                handleRegenerate={handleRegenerate}
-              />
-            )}
-            {isLoading && !firstTokenReceived && <AssistantMessageLoading />}
-          </>
-        }
-        footer={
-          <div className="sticky bottom-0 flex flex-col items-center gap-4">
-            <ScrollToBottom className="animate-in fade-in-0 zoom-in-95 absolute bottom-full left-1/2 mb-4 -translate-x-1/2" />
-            {footer}
-          </div>
-        }
-      />
-    </StickToBottom>
+              {isLoading && !firstTokenReceived && <AssistantMessageLoading />}
+            </>
+          }
+        />
+
+        {/* Scroll to bottom button — inside StickToBottom context */}
+        <ScrollToBottom className="animate-in fade-in-0 zoom-in-95 absolute bottom-2 left-1/2 z-10 -translate-x-1/2" />
+      </StickToBottom>
+
+      {/* Footer (input bar) — OUTSIDE the scroll area so messages never go under it */}
+      {footer && (
+        <div className="relative z-10 shrink-0">
+          {/* Gradient fade — creates smooth visual transition from messages to input */}
+          <div className="pointer-events-none absolute -top-8 left-0 right-0 h-8 bg-gradient-to-t from-[#030303] to-transparent" />
+          {footer}
+        </div>
+      )}
+    </div>
   );
 }
 

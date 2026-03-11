@@ -10,6 +10,7 @@ import { PolicyQAView } from "./PolicyQAView";
 import { ClaimsView } from "./ClaimsView";
 import { CoverageUpgradeView } from "./CoverageUpgradeView";
 import { DamageAssessmentView } from "./DamageAssessmentView";
+import { DashboardView } from "./DashboardView";
 import ThreadHistory from "@/components/thread/history";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 
@@ -154,6 +155,13 @@ export function ViewRouter() {
                 policyNumber={policyNumber}
                 policySubmitted={policySubmitted}
                 onPolicySubmitted={handlePolicySubmitted}
+                onHome={handleHome}
+                onNewThread={handleNewThread}
+              />
+            )}
+            {currentView === "dashboard" && (
+              <DashboardView
+                policyNumber={policyNumber}
                 onHome={handleHome}
                 onNewThread={handleNewThread}
               />

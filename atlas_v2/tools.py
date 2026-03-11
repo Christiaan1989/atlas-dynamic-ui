@@ -71,8 +71,9 @@ def set_active_view(view: str) -> str:
               - "claims" — the guided claims filing experience
               - "coverage_upgrade" — the coverage upgrade options view
               - "damage_assessment" — the standalone damage assessment scanner
+              - "dashboard" — the customer's personal policy & claims dashboard
     """
-    valid_views = {"home", "policy_qa", "claims", "coverage_upgrade", "damage_assessment"}
+    valid_views = {"home", "policy_qa", "claims", "coverage_upgrade", "damage_assessment", "dashboard"}
     if view not in valid_views:
         return json.dumps({"error": f"Invalid view '{view}'. Must be one of: {', '.join(sorted(valid_views))}"})
     return json.dumps({"active_view": view, "status": "ok"})

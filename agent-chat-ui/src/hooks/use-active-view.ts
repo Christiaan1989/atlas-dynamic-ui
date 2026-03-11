@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { Message } from "@langchain/langgraph-sdk";
 
-export type ViewType = "home" | "policy_qa" | "claims" | "coverage_upgrade" | "damage_assessment";
+export type ViewType = "home" | "policy_qa" | "claims" | "coverage_upgrade" | "damage_assessment" | "dashboard";
 
 /**
  * Scans the message stream for the most recent `set_active_view` tool result
